@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+# Node build artifacts
+node_modules
+npm-debug.log
+
+# Local development
+*.env
+*.dev
+.DS_Store
+
+# Docker
+Dockerfile
+docker-compose.yml
+=======
 # Logs
 logs
 *.log
@@ -57,3 +71,4 @@ typings/
 # dotenv environment variables file
 .env
 
+>>>>>>> a350d374f027ac83536a7677dd0a5414927a1ce3

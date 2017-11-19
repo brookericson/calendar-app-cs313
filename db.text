@@ -1,0 +1,291 @@
+CREATE TABLE public.user
+(
+	user_id SERIAL NOT NULL PRIMARY KEY,
+	firstname VARCHAR(200) NOT NULL,
+	lastname VARCHAR(200) NOT NULL,
+	email VARCHAR(200) NOT NULL,
+	password VARCHAR(200) NOT NULL 
+);
+
+CREATE TABLE public.todo
+(
+	todo_item_id SERIAL NOT NULL PRIMARY KEY,
+	user_id SERIAL NOT NULL REFERENCES public.user(user_id),
+	item VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE public.time
+(
+	time_id SERIAL NOT NULL PRIMARY KEY,
+	start_time VARCHAR(100) NOT NULL,
+	end_time VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE public.date
+(
+	date_id SERIAL NOT NULL PRIMARY KEY,
+	date VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE public.event
+(
+	event_id SERIAL NOT NULL PRIMARY KEY,
+	user_id SERIAL NOT NULL REFERENCES public.user(user_id),
+	date DATE NOT NULL,
+	start_time TIME NOT NULL,
+	end_time TIME NOT NULL,
+	event_name VARCHAR(200) NOT NULL
+);
+
+
+INSERT INTO public.user (
+	firstname
+	, lastname
+	, password
+	, email
+) VALUES (
+	'test'
+	, 'test'
+	, 'Pa55w0rd'
+	, 'test@mail.com'
+	);
+	
+INSERT INTO public.event (
+	user_id
+	, date
+	, start_time
+	, end_time
+	, event_name
+) VALUES (
+	'1'
+	, '11/18/2017'
+	, '02:00 PM'
+	, '04:00 PM'
+	, 'Class Meeting'
+	);
+	
+INSERT INTO public.author (name) VALUES ('C.S. Lewis');
+
+INSERT INTO public.author (name) VALUES ('Dale Carnegie');
+
+INSERT INTO public.author (name) VALUES ('Stephen Covey');
+
+INSERT INTO public.author (name) VALUES ('J.K Rowling');
+
+INSERT INTO public.category (category_name) VALUES ('Success');
+
+INSERT INTO public.category (category_name) VALUES ('Happiness');
+
+INSERT INTO public.category (category_name) VALUES ('Courage');
+
+INSERT INTO public.category (category_name) VALUES ('Life');
+
+INSERT INTO public.category (category_name) VALUES ('Self Worth');
+
+INSERT INTO public.category (category_name) VALUES ('Becoming');
+
+INSERT INTO public.category (category_name) VALUES ('Moving On');
+
+INSERT INTO public.category (category_name) VALUES ('Love');
+
+INSERT INTO public.category (category_name) VALUES ('Friendship');
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	1
+	, 2
+	, 'Develop success from failures. Discouragement and failure are two of the surest stepping stones to success.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	1
+	, 1
+	, 'Failures, repeated failures are finger posts on the road to achievement. One fails forward toward success.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	2
+	, 2
+	, 'Happiness doesn''t depend on any external conditions, it is governed by our mental attitude.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	2
+	, 2
+	, 'Success is getting what you want. Happiness is wanting what you get.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	2
+	, 2
+	, 'Remember happiness doesn''t depend upon who you are or what you have; it depends solely on what you think.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	3
+	, 2
+	, 'Most of us have far more courage than we ever dreamed we possessed.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	3
+	, 2
+	, 'You can conquer almost any fear if you will only make up your mind to do so. For remember, fear doesn''t exit anywhere except in the mind.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	4
+	, 2
+	, 'One of the most tragic things I know about human nature is that all of us tend to put off living. We are all dreaming of some magical rose garden over the horizon instead of enjoying the roses that are blooming outside our windows today.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	4
+	, 2
+	, 'Today is life - the only life you are sure of. Make the most of today. Get interested in something. Shake yourself awake. Develop a hobby. Let the winds of enthusiasm sweep through you. Live today with gusto.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	5
+	, 1
+	, 'It may be hard for an egg to turn into a bird: it would be a jolly sight harder for it to learn to fly while remaining an egg. We are like eggs at present. And you cannot go on indefinitely being just an ordinary, decent egg. We must be hatched or go bad.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	5
+	, 1
+	, 'What I call my ''self'' now is hardly a person at all. It''s mainly a meeting place for various natural forces, desires, and fears, etcetera, some of which come from my ancestors, and some from my education, some perhaps from devils. The self you really intended to be is something that lives not from nature but from God.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	5
+	, 1
+	, 'When Christ died, He died for you individually just as much as if you''d been the only man in the world.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	5
+	, 1
+	, 'We are what we believe we are.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	5
+	, 1
+	, 'Humility is not thinking less of yourself, but thinking of yourself less.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	6
+	, 1
+	, 'We all want progress, but if you''re on the wrong road, progress means doing an about-turn and walking back to the right road; in that case, the man who turns back soonest is the most progressive.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	6
+	, 1
+	, 'You are never too old to set another goal or to dream a new dream.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	7
+	, 1
+	, 'There are far, far better thing ahead than anything we leave behind.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	7
+	, 1
+	, 'If God forgives us we must forgive ourselves otherwise its like setting up ourselves otherwise its like setting up ourselves as a higher tribunal than Him.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	8
+	, 1
+	, 'There is no safe investment. To love at all is to be vulnerable. Love anything, and your heart will certainly be wrung and possibly be broken. If you want to make sure of keeping it intact, you must give your heart to no one, not even to an animal. Wrap it carefully round with hobbies and little luxuries; avoid all entanglements; lock it up safe in the casket or coffin of your selfishness. But in that casket û safe, dark, motionless, airless û it will change. It will not be broken; it will become unbreakable, impenetrable, irredeemable. The alternative to tragedy, or at least to the risk of tragedy, is damnation. The only place outside Heaven where you can be perfectly safe from all the dangers and perturbations of love is Hell.'
+);
+
+INSERT INTO public.quote (
+	category_id
+	, authorid
+	, quote
+) VALUES (
+	3
+	, 2
+	, 'If you want to conquer fear, don&#39;t sit home and think about it. Go out and get busy.'
+);

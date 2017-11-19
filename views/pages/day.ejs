@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<% include ../partials/header.ejs %>
+</head>
+
+<body>
+		<header>
+			<nav>
+				<ul>
+					<li><a href="/day">Planner</a></li>
+					<li><a href="/todo">To Do List</a></li>
+				</ul>
+			</nav>
+		</header>     
+<main>
+        
+            <div class="date_temp_description">
+                <p id="date">Today's Date</p>
+            </div>
+           <div class="container"> 
+			   <div>
+			   <h3>Events for Today</h3>
+			   <ul>
+				   <li><strong><%= event_name %></strong></li>
+				   <li>Start Time: <%= start_time %></li>
+				   <li>End Time: <%= end_time %></li>
+				   </ul>
+			   </div>
+<!--
+            <section>
+                <div id="hourly_schedule">
+					<div>6:00</div>
+                    <div>6:30</div>
+                    <div>7:00</div>
+                    <div>7:30</div>
+                    <div>8:00</div>
+                    <div>8:30</div>
+                    <div>9:00</div>
+                    <div>9:30</div>
+                    <div>10:00</div>
+                    <div>10:30</div>                  
+					<div>11:00</div>
+                    <div>11:30</div>
+                    <div>12:00</div>
+                    <div>12:30</div>
+                    <div>1:00</div>
+                    <div>1:30</div>
+                    <div>2:00</div>
+                    <div>2:30</div>
+                    <div>3:00</div>
+                    <div>3:30</div>
+                    <div>4:00</div>
+                    <div>4:30</div>
+                    <div>5:00</div>
+                    <div>5:30</div>
+                    <div>6:00</div>
+                    <div>6:30</div>
+                    <div>7:00</div>
+					<div>7:30</div>
+                    <div>8:00</div>
+                    <div>8:30</div>
+                    <div>9:00</div>
+                    <div>9:30</div>
+                    <div>10:00</div>
+                    <div>10:30</div>
+					<div>11:00</div>
+                    <div>11:30</div>
+                    <div>12:00</div>
+                </div>
+			</section>
+-->
+			<form class="event-form">
+				<h3>Add Event to Schedule</h3>
+				<label>Name of Event</label>
+				<input type="text" name="name">
+				<label>Date</label>
+				<input type="date" name="date">
+				<label>Start Time</label>
+				<input type="time" name="start_time">
+				<label>End Time</label>
+				<input type="time" name="end_time">
+				<input type="hidden" name="user_id">
+				<input type="hidden" name="date_id">
+				<input type="submit" value="Add Event">
+	</form>
+	</div>
+		</main>
+	</body>
+</html>

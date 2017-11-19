@@ -1,0 +1,74 @@
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+header ul {
+	display: flex;
+	flex-flow: row nowrap;
+	padding: 25px;
+}
+
+header li {
+	list-style-type: none;
+	padding: 0 15px;
+}
+
+main {
+	margin: 25px;
+}
+
+table {
+  border: solid black .5px;
+  width: 100%;
+  text-align: center;
+}
+
+td, th {
+	width: 12.5%;
+	text-align: center;
+	padding: 3px;
+	border: darkgray .5px solid;
+
+}
+
+td {
+	height: 80vh;
+}
+
+th {
+  background-color: lightgray;
+}
+
+#date {
+	margin: 20px;
+}
+
+.container {
+	display: flex;
+	margin: 0;
+	width: 100%;
+}
+section {
+	display: grid;
+	border: solid black 1px;
+	grid-template-columns: 15% 85%;
+  	grid-template-rows: repeat(37, 21px [col-start]);
+	width: 30%;
+}
+
+form {
+	margin: 0 auto;
+	display: flex;
+	flex-flow: column nowrap;
+	width: 350px;
+}
+
+#hourly_schedule {
+	grid-column: 0;
+    grid-row: 0;
+}
+
+#hourly_schedule div {
+	text-align:  center;
+	border: solid black .5px;
+}
