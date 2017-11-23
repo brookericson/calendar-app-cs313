@@ -5,11 +5,37 @@
 </head>
 
 <body>
-<h1>Todo List</h1>
+<header>
+			<nav>
+				<ul>
+					<li><a href="/day?user_id=<%=todoList[0].user_id%>">Event Planner</a></li>
+					<li><a href="/todo?user_id=<%=todoList[0].user_id%>">To Do List</a></li>
+				</ul>
+			</nav>
+		</header> 
+	<main>
+<div class="container">	
+	<div class="column">
+<h3>Todo List</h3>
+		<table class="todolist-table">
+	  <% for (var i = 0; i < todoList.length; i++) { %>
+			<tr>
+				<td><input type="checkbox"></td>
+		<td><%= todoList[i].item %></td>
+			</tr>
+		<% } %>
+		</table>
+	</div>
+	<div class="column">
 <form>
+	<h3>Add an item to the list:</h3>
+	<label>Item Name</label>
 	<input type="text" name="item">
 	<input type="submit" value="Add item to list">
 	<input type="hidden" name="user_id">
 </form>
+	</div>
+	</div>
+	</main>
 </body>
 </html>

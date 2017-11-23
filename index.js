@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 var pg = require('pg');
+//const connection = "postgres://postgres:Flatirons11@localhost:5432/planner";
 const connection = "postgres://xnvuvjhworoltf:a245729dd1b3098790240daee1dd04034caedf335a7c701b8fa225f0081e7d38@ec2-174-129-15-251.compute-1.amazonaws.com:5432/d48k9ohpfakaje";
 
 app.set('port', (process.env.PORT || 5000));
@@ -16,12 +17,18 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.get('/day', function(request, response) {
+app.get('/home', function(request, response) {
   getUserId(request, response);
 });
 
+app.get('/day', function(request, response) {
+  var user_id = request.query.user_id;
+  getEvent(user_id, request, response);
+});
+
 app.get('/todo', function(request, response) {
-  response.render('pages/todo');
+  var user_id = request.query.user_id;
+  getToDoList(user_id, request, response);
 });
 
 app.listen(app.get('port'), function() {
@@ -30,7 +37,6 @@ app.listen(app.get('port'), function() {
 
 
 function getUserId(request, response) {
-	
 	var email = request.query.email;
 	var password = request.query.password;
 					
@@ -39,9 +45,9 @@ function getUserId(request, response) {
 			response.status(500).json({success: false, data: error});
 		}
 		else {
-			var user_id = result[0];
-			var date = '2017-11-18';
-			var event = getEvent(user_id, date, request, response);
+			var result = result[0];
+			var user_id = result.user_id;
+			getEvent(user_id, request, response);
 		}
 	});
 }
@@ -59,8 +65,7 @@ function getUserIdFromDb(email, password, callback) {
 
 		var sql = "SELECT user_id FROM public.user WHERE email = $1 AND password = $2";
 		var params = [email, password];
-		console.log(sql);
-
+	
 		var query = client.query(sql, params, function(err, result) {
 			client.end(function(err) {
 				if (err) throw err;
@@ -81,23 +86,20 @@ function getUserIdFromDb(email, password, callback) {
 }
 
 
+function getEvent(user_id, request, response) {
 
+	getEventFromDb(user_id, function(error, result) {
 
-
-function getEvent(user_id, date, request, response) {
-
-	getEventFromDb(user_id, date, function(error, result) {
-
-		if (error || result == null || result.length != 1) {
+		if (error || result == null || result.length <= 1) {
 			response.status(500).json({success: false, data: error});
 		} else {
-			var event = result[0];
-			response.render('pages/day', event);
+			var event = result;
+			response.render('pages/day', {events: event});
 		}
 	});
 }
 
-function getEventFromDb(user_id, date, callback) {
+function getEventFromDb(user_id, callback) {
 
 	var client = new pg.Client(connection);
 
@@ -107,10 +109,10 @@ function getEventFromDb(user_id, date, callback) {
 			console.log(err);
 			callback(err, null);
 		}
-		var user_id = 1;
-		var sql = "SELECT event_name, start_time, end_time FROM event WHERE user_id = $1 AND date = $2";
-		var params = [user_id, date];
-		console.log(params);
+		
+		var sql = "SELECT u.user_id, event_name, CAST(start_time as time) as start_time, CAST(end_time as time) as end_time, date FROM event e JOIN public.user u ON e.user_id = u.user_id WHERE u.user_id = $1";
+		var params = [user_id];
+		
 		var query = client.query(sql, params, function(err, result) {
 			client.end(function(err) {
 				if (err) throw err;
@@ -130,24 +132,22 @@ function getEventFromDb(user_id, date, callback) {
 
 }
 
-function getToDoList(request, response) {
+function getToDoList(user_id, request, response) {
 	
-	var user_id = 1;
 
-	getToDoList(user_id, function(error, result) {
+	getToDoListFromDb(user_id, function(error, result) {
 
-		if (error || result == null || result.length != 1) {
+		if (error || result == null || result.length <= 1) {
 			response.status(500).json({success: false, data: error});
 		} else {
-			var toDoList = result[0];
-			response.status(200).json(result[0]);
+			var todo = result;
+			response.render('pages/todo', {todoList: todo});
 		}
 	});
 }
 
 function getToDoListFromDb(user_id, callback) {
-	console.log("Getting event from DB with user id and date: " + user_id);
-
+	
 	var client = new pg.Client(connection);
 
 	client.connect(function(err) {
@@ -157,7 +157,7 @@ function getToDoListFromDb(user_id, callback) {
 			callback(err, null);
 		}
 
-		var sql = "SELECT item FROM todo WHERE user_id = $1";
+		var sql = "SELECT u.user_id, item FROM todo t JOIN public.user u ON t.user_id = u.user_id WHERE u.user_id = $1";
 		var params = [user_id];
 
 		var query = client.query(sql, params, function(err, result) {
@@ -177,4 +177,26 @@ function getToDoListFromDb(user_id, callback) {
 		});
 	});
 
+}
+
+function getTodaysDate(){
+	
+var today = new Date();
+	
+var dd = today.getDate();
+
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10) 
+{
+    dd='0'+dd;
+} 
+
+if(mm<10) 
+{
+    mm='0'+mm;
+} 
+
+today = yyyy+'-'+mm+'-'+dd;
+return today;
 }

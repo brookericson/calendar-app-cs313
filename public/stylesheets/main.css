@@ -10,65 +10,54 @@ header ul {
 
 header li {
 	list-style-type: none;
-	padding: 0 15px;
+	padding: 0 15px 0 0 ;
 }
 
 main {
 	margin: 25px;
 }
 
-table {
-  border: solid black .5px;
-  width: 100%;
-  text-align: center;
-}
-
-td, th {
-	width: 12.5%;
-	text-align: center;
-	padding: 3px;
-	border: darkgray .5px solid;
-
-}
-
-td {
-	height: 80vh;
-}
-
-th {
-  background-color: lightgray;
-}
-
-#date {
-	margin: 20px;
-}
-
 .container {
-	display: flex;
+	padding: 0;
 	margin: 0;
+	display: flex;
 	width: 100%;
 }
-section {
-	display: grid;
-	border: solid black 1px;
-	grid-template-columns: 15% 85%;
-  	grid-template-rows: repeat(37, 21px [col-start]);
-	width: 30%;
+
+.column {
+	width: 50%;
 }
 
 form {
-	margin: 0 auto;
 	display: flex;
-	flex-flow: column nowrap;
-	width: 350px;
+	flex-flow: column;
+	max-width: 400px;
+	margin: 0 auto;
 }
 
-#hourly_schedule {
-	grid-column: 0;
-    grid-row: 0;
+ td, th {
+	width: 5%;
+	padding: 5px 0;
 }
 
-#hourly_schedule div {
-	text-align:  center;
-	border: solid black .5px;
+td, th {
+	border: black solid 1px;
+	text-align: center;
 }
+
+tr:nth-child(2n){
+	background-color: whitesmoke ;
+}
+
+.todolist-table td {
+	width: inherit;
+	text-align: left;
+	padding: 10px;
+}
+
+input {
+	margin-bottom: 5px;
+	border: solid black 1px;
+}
+
+
