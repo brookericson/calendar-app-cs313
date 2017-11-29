@@ -79,31 +79,25 @@ INSERT INTO public.event (
 	);
 	
 	INSERT INTO public.todo (
-	todo_item_id
-	, user_id
+	user_id
 	, item
 ) VALUES (
 	'1'
-	, '1'
 	, 'CS 366 Project'
 	);
 	
 INSERT INTO public.todo (
-	todo_item_id
-	, user_id
+	user_id
 	, item
 ) VALUES (
-	'2'
-	, '1'
+	'1'
 	, 'CS 308 Proposal Rough Draft'
 	);
 	
 		INSERT INTO public.todo (
-	todo_item_id
-	, user_id
+	user_id
 	, item
 ) VALUES (
-	'3'
-	, '1'
+	'1'
 	, 'CS 371 Usability Plan'
 	);

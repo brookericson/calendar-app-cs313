@@ -17,18 +17,17 @@
 <main>
         
             <div class="date_temp_description">
-                <p id="date">Today's Date</p>
             </div>
            <div class="container"> 
 			   <div class="column">
 			   	<h3> Your Scheduled Events </h3>
 				   <table>
 			   	<tr>
-					<th></th>
 				   <th>Date</th>
 					<th>Name</th>
 					<th>Start Time</th>
 					<th>End Time</th>
+					<th></th>
 				   </tr>
 				   <tr>
 			    <% for (var i = 0; i < events.length; i++) {
@@ -62,28 +61,27 @@
 						
 						
 				%>
-					<td><input type="checkbox"></td>
 					<td><%= date %></td>
 					<td><%= events[i].event_name %></td>
 					<td><%= strtTime %></td>
 					<td><%= endTime %></td>
+					<td><a href="/deleteEvent?user_id=<%= events[i].user_id%>&event_id=<%= events[i].event_id%>">&#10006;</a></td>
 					   </tr>
 					<% } %>
 				   </table>
 	</div>
      	<div class="column">
-			<form class="event-form">
+			<form class="event-form" action="\updateEvent" method="GET">
 				<h3>Add Event to Schedule</h3>
 				<label>Name of Event</label>
-				<input type="text" name="name">
+				<input type="text" name="event_name">
 				<label>Date</label>
 				<input type="date" name="date">
 				<label>Start Time</label>
 				<input type="time" name="start_time">
 				<label>End Time</label>
 				<input type="time" name="end_time">
-				<input type="hidden" name="user_id">
-				<input type="hidden" name="date_id">
+				<input type="hidden" name="user_id" value="<%=events[0].user_id%>">
 				<input type="submit" value="Add Event">
 	</form>
 			   </div>
