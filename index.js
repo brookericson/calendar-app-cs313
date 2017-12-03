@@ -3,8 +3,8 @@ var express = require('express');
 var app = express();
 
 var pg = require('pg');
-const connection = "postgres://postgres:Flatirons11@localhost:5432/planner";
-//const connection = "postgres://xnvuvjhworoltf:a245729dd1b3098790240daee1dd04034caedf335a7c701b8fa225f0081e7d38@ec2-174-129-15-251.compute-1.amazonaws.com:5432/d48k9ohpfakaje";
+//const connection = "postgres://postgres:Flatirons11@localhost:5432/planner";
+const connection = "postgres://xnvuvjhworoltf:a245729dd1b3098790240daee1dd04034caedf335a7c701b8fa225f0081e7d38@ec2-174-129-15-251.compute-1.amazonaws.com:5432/d48k9ohpfakaje";
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
