@@ -26,8 +26,11 @@
 							</td>
 							<td><a href="/deleteItem?user_id=<%= todoList[i].user_id%>&todo_item_id=<%= todoList[i].todo_item_id%>">&#10006;</a></td></tr>
 							<% } %>
+					<td><input type="text" id="todo_item"></td>
+					<td><button type="button" onclick="addItem(<%= todoList[1].user_id %>)">&#43;</button></td>
 				</table>
 			</div>
+<!--
 			<div class="column">
 				<form action="/updateToDoList" method="GET">
 					<h3>Add an item to the list:</h3>
@@ -37,6 +40,7 @@
 					<input type="hidden" name="user_id" value="<%=todoList[0].user_id%>">
 				</form>
 			</div>
+-->
 		</div>
 	</main>
 </body>

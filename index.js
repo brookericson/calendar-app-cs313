@@ -1,9 +1,16 @@
+var path = require('path');
 var express = require('express');
 var app = express();
 
 var pg = require('pg');
-//const connection = "postgres://postgres:Flatirons11@localhost:5432/planner";
-const connection = "postgres://xnvuvjhworoltf:a245729dd1b3098790240daee1dd04034caedf335a7c701b8fa225f0081e7d38@ec2-174-129-15-251.compute-1.amazonaws.com:5432/d48k9ohpfakaje";
+const connection = "postgres://postgres:Flatirons11@localhost:5432/planner";
+//const connection = "postgres://xnvuvjhworoltf:a245729dd1b3098790240daee1dd04034caedf335a7c701b8fa225f0081e7d38@ec2-174-129-15-251.compute-1.amazonaws.com:5432/d48k9ohpfakaje";
+
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -50,6 +57,8 @@ app.get('/deleteItem', function(request, response) {
    var todo_item_id = request.query.todo_item_id;
    deleteItem(user_id, todo_item_id, request, response);
 });
+
+app.post('/addItem', updateTodo);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
@@ -250,8 +259,8 @@ function updateEventToDb(user_id, date, event_name, start_time, end_time, callba
 
 function updateTodo(request, response) {
 	
-	var item = request.query.item;
-	var user_id = request.query.user_id;
+	var item = request.body.item
+	var user_id = request.body.user_id
 	
 	updateTodoToDb(item, user_id, function(error, result) {
 
