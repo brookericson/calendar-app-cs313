@@ -6,31 +6,48 @@
 </head>
 
 <body>
-		<header>
-			<nav>
-				<ul>
-					<li><a href="/day?user_id=<%=events[0].user_id%>">Event Planner</a></li>
-					<li><a href="/todo?user_id=<%=events[0].user_id%>">To Do List</a></li>
-				</ul>
-			</nav>
-		</header>     
-<main>
-        
-            <div class="date_temp_description">
-            </div>
-           <div class="container"> 
-			   <div class="column">
-			   	<h3> Your Scheduled Events </h3>
-				   <table class="event-table">
-			   	<tr>
-				   <th>Date</th>
-					<th>Name</th>
-					<th>Start Time</th>
-					<th>End Time</th>
-					<th></th>
-				   </tr>
-				   <tr>
-			    <% for (var i = 0; i < events.length; i++) {
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/day?user_id=<%=events[0].user_id%>">My Events</a></li>
+				<li><a href="/todo?user_id=<%=events[0].user_id%>">To Do List</a></li>
+				<li>
+					<%
+
+						var date = new Date();
+
+						var year = date.getFullYear();
+
+						var month = date.getMonth() + 1;
+						month = (month < 10 ? "0" : "") + month;
+
+						var day  = date.getDate();
+						day = (day < 10 ? "0" : "") + day;
+
+						var dateFinal = month + "/" + day + "/" + year;
+					%>
+						<%=dateFinal%>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+
+		<div class="date_temp_description">
+		</div>
+		<div class="container">
+			<div class="column">
+				<h1> Your Scheduled Events </h1>
+				<table class="table table-striped">
+					<tr>
+						<th>Date</th>
+						<th>Name</th>
+						<th>Start Time</th>
+						<th>End Time</th>
+						<th></th>
+					</tr>
+					<tr>
+						<% for (var i = 0; i < events.length; i++) {
 					month = '' + (events[i].date.getMonth() + 1),
         			day = '' + events[i].date.getDate(),
         			year = events[i].date.getFullYear();
@@ -61,15 +78,31 @@
 						
 						
 				%>
-					<td><%= date %></td>
-					<td><%= events[i].event_name %></td>
-					<td><%= strtTime %></td>
-					<td><%= endTime %></td>
-					<td><a href="/deleteEvent?user_id=<%= events[i].user_id%>&event_id=<%= events[i].event_id%>">&#10006;</a></td>
-					   </tr>
+							<td>
+								<%= date %>
+							</td>
+							<td>
+								<%= events[i].event_name %>
+							</td>
+							<td>
+								<%= strtTime %>
+							</td>
+							<td>
+								<%= endTime %>
+							</td>
+							<td><a class="btn btn-danger" href="/deleteEvent?user_id=<%= events[i].user_id%>&event_id=<%= events[i].event_id%>">&#10006;</a></td>
+					</tr>
 					<% } %>
-				   </table>
-	</div>
+						<tr>
+
+							<td><input type="date" name="date" id="date"></td>
+							<td><input type="text" name="event_name" id="event_name"></td>
+							<td><input type="time" name="start_time" id="start_time"></td>
+							<td><input type="time" name="end_time" id="end_time"></td>
+							<td><button class="btn btn-primary" type="button" onclick="addEvent(<%= events[0].user_id%>)">&#43;</button></td>
+				</table>
+			</div>
+			<!--
      	<div class="column">
 			<form class="event-form" action="\updateEvent" method="GET">
 				<h3>Add Event to Schedule</h3>
@@ -85,7 +118,9 @@
 				<input type="submit" value="Add Event">
 	</form>
 			   </div>
-	</div>
-		</main>
-	</body>
+-->
+		</div>
+	</main>
+</body>
+
 </html>

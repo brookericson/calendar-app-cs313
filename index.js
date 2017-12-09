@@ -60,6 +60,8 @@ app.get('/deleteItem', function(request, response) {
 
 app.post('/addItem', updateTodo);
 
+app.post('/addEvent', updateEvent);
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
@@ -211,11 +213,11 @@ function getToDoListFromDb(user_id, callback) {
 
 function updateEvent(request, response) {
 	
-	var date = request.query.date;
-	var event_name = request.query.event_name;
-	var start_time = request.query.start_time;
-	var end_time = request.query.end_time;
-	var user_id = request.query.user_id;
+	var date = request.body.date
+	var user_id = request.body.user_id
+	var event_name = request.body.event_name
+	var start_time = request.body.start_time
+	var end_time = request.body.end_time
 	
 	updateEventToDb(user_id, date, event_name, start_time, end_time, function(error, result) {
 
